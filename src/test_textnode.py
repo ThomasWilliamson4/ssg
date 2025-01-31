@@ -32,6 +32,11 @@ class TestTextNode(unittest.TestCase):
         node = TextNode("This is a text node", TextType.NORMAL, "https://www.boot.dev")
         self.assertEqual("TextNode(This is a text node, normal, https://www.boot.dev)", repr(node))
 
+    def test_text_to_node(self):
+        node = TextNode("This is a link node", TextType.IMAGE, "https://www.boot.dev")
+        self.assertEqual(node.text_node_to_html_node(),'<img src="https://www.boot.dev" alt="This is a link node"></img>')
+
+
 
 
 if __name__ == "__main__":
