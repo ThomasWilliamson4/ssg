@@ -7,7 +7,7 @@ from textnode import TextType, TextNode
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
     output_nodes = [] # a list of nodes
     for node in old_nodes:
-        if node.text_type != TextType.TEXT:
+        if node.text_type != TextType.NORMAL:
             output_nodes.append(node)
             continue
         
@@ -21,7 +21,7 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
             if split_node[i] == "":
                 continue
             if i % 2 == 0: # even cases where text type will be text
-                split_output.append(TextNode(split_node[i], TextType.TEXT))
+                split_output.append(TextNode(split_node[i], TextType.NORMAL))
             else:
                 split_output.append(TextNode(split_node[i], text_type))
         output_nodes.extend(split_output)  #extend by iterable list
