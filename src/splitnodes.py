@@ -1,6 +1,6 @@
 from htmlnode import HTMLNode
-from leafnode import LeafNode
-from parentnode import ParentNode
+from htmlnode import LeafNode
+from htmlnode import ParentNode
 from textnode import TextType, TextNode
 
 
