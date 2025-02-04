@@ -36,8 +36,20 @@ def extract_markdown_links(text):
     return matches
             
 def split_nodes_image(old_nodes):
+    output_nodes =[]
+    for node in old_nodes:
+        if node.text_type != TextType.NORMAL:
+            output_nodes.append(node)
+            continue
+        images = extract_markdown_images(node.text)
+        if len(images) == 0:
+            output_nodes.append(node)
+            continue
+        for image in images:
+            
+
+        
 
 
 
 def split_nodes_link(old_nodes):
-         
