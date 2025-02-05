@@ -46,10 +46,18 @@ def split_nodes_image(old_nodes):
             output_nodes.append(node)
             continue
         for image in images:
+            #here
             
 
-        
-
-
-
 def split_nodes_link(old_nodes):
+    output_nodes =[]
+    for node in old_nodes:
+        if node.text_type != TextType.NORMAL:
+            output_nodes.append(node)
+            continue
+        links = extract_markdown_images(node.text)
+        if len(links) == 0:
+            output_nodes.append(node)
+            continue
+        for link in links:
+            #here
