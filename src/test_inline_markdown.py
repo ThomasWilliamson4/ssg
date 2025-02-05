@@ -180,10 +180,7 @@ class TestInlineMarkdown(unittest.TestCase):
             ],
             nodes,
         )
-    def test_text_to_nodes(self):
-        text = ""
-        nodes = text_to_textnodes()
-        self.assertListEqual()
+
 
 if __name__ == "__main__":
     unittest.main()
