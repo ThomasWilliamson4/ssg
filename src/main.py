@@ -1,9 +1,13 @@
-from textnode import TextNode
-from textnode import TextType
+from copystatic import copy_source_to_dest
+
+source_dir = "./static"
+dest_dir = "./public"
+
+
 
 def main():
-    node = TextNode("This is a text node", TextType.BOLD, "https://www.boot.dev")
-    print(node)
+    copy_source_to_dest(source_dir, dest_dir)
+    
 
 if __name__ == "__main__":
     main()    
