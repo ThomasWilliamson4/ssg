@@ -44,7 +44,9 @@ def text_to_children(text):
 
 def convert_paragraph_block(block):
     stripped_text = block.strip()
-    children = text_to_children(stripped_text)
+    lines = stripped_text.split("\n")
+    text = " ".join(lines)
+    children = text_to_children(text)
     return ParentNode("p", children)
 
 def convert_heading_block(block):
@@ -83,30 +85,24 @@ def convert_quote_block(block):
     return ParentNode("blockquote", children)
 
 
-def convert_unordered_list_block(block):
-    lines = block.split("\n")
-    html = []
-    for line in lines:
-
-
-
-
-
-    
-    return ParentNode("ul", unordered)
-
 def convert_ordered_list_block(block):
+    lines = block.split("\n")
+    children_nodes = []
+    for line in lines:
+        text = line[3:] # number dot space then text
+        children = text_to_children(text)
+        children_nodes.append(ParentNode("li",children))
+    return ParentNode("ol", children_nodes)
 
 
-
-
-
-
-    
-    return ParentNode("ol", ordered)
-
-
-
+def convert_unordered_list_block(block):
+    items = block.split("\n")
+    children_nodes = []
+    for item in items:
+        text = item[2:] # symbol space then text start
+        children = text_to_children(text)
+        children_nodes.append(ParentNode("li", children))
+    return ParentNode("ul", children_nodes)
 
 
 
@@ -129,10 +125,12 @@ def block_to_html(block):
         return convert_paragraph_block(block)
     raise ValueError("invalid block type")
 
-def markdown_to_html(markdown):
+def markdown_to_html_node(markdown):
     blocks = markdown_to_blocks(markdown)
     children = []
-    #blocks to children
+    for block in blocks:
+        children.append(block_to_html(block))
+    
     return ParentNode("div", children)
   
 

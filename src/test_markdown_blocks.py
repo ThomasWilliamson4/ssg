@@ -1,5 +1,5 @@
 import unittest
-from markdown_blocks import markdown_to_blocks, block_to_block_type
+from markdown_blocks import markdown_to_blocks, block_to_block_type, markdown_to_html_node
 
 
 class TestMarkdownToHTML(unittest.TestCase):
@@ -59,6 +59,23 @@ This is the same paragraph on a new line
         self.assertEqual(block_to_block_type(block),  "ordered list")
         block = "paragraph"
         self.assertEqual(block_to_block_type(block), "paragraph")
+
+    def test_markdown_to_html(self):
+        markdown = """
+This is **bolded** paragraph
+text in a p
+tag here
+
+This is another paragraph with *italic* text and `code` here
+
+"""
+        node = markdown_to_html_node(markdown)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><p>This is <b>bolded</b> paragraph text in a p tag here</p><p>This is another paragraph with <i>italic</i> text and <code>code</code> here</p></div>",
+        )
+    
 
 
 
