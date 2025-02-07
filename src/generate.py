@@ -1,6 +1,5 @@
 from markdown_blocks import markdown_to_html_node
-
-
+import os
 
 def extract_title(markdown):
     lines = markdown.split("\n")
@@ -11,10 +10,20 @@ def extract_title(markdown):
 
 def generate_page(from_path, template_path, dest_path):
     print(f"Generating page from {from_path} to {dest_path} using {template_path}")
-    markdown = # read mkdown from_path 
-    template = #read template template_path
-    page = markdown_to_html_node(markdown)
-    page_html = page.to_html()
+    
+    from_file = open(from_path, "r")
+    markdown = from_file.read()
+    from_file.close()
+
+    template_file = open(template_path, "r")
+    template = template_file.read()
+    template_file.close()
+
+    page_nodes = markdown_to_html_node(markdown)
+    page_html = page_nodes.to_html()
     title = extract_title(markdown)
-    # replace title and content in template
+
+    template.replace("{{TITLE}}", title)
+    template.replace("{{CONTENT}}", page_html)
+    
 
