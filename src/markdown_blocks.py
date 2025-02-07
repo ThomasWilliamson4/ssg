@@ -1,5 +1,5 @@
 import re
-from htmlnode import HTMLNode, ParentNode
+from htmlnode import ParentNode
 from textnode import text_node_to_html_node
 from extractors import text_to_textnodes
 
@@ -70,7 +70,7 @@ def convert_code_block(block):
     stripped_text = block.lstrip("```").rstrip("```").strip()
     children = text_to_children(stripped_text)
     code = ParentNode("code", children)
-    return ParentNode("pre", code)
+    return ParentNode("pre", [code])
 
 
 def convert_quote_block(block):
@@ -104,11 +104,6 @@ def convert_unordered_list_block(block):
         children_nodes.append(ParentNode("li", children))
     return ParentNode("ul", children_nodes)
 
-
-
-
-
-
 def block_to_html(block):
     type = block_to_block_type(block)
     if type == "code":
@@ -132,11 +127,4 @@ def markdown_to_html_node(markdown):
         children.append(block_to_html(block))
     
     return ParentNode("div", children)
-  
-
-        
-
-
-
-        
 
